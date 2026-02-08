@@ -43,7 +43,7 @@ PY
 if [ "$ai" = "yes" ]; then
 	: "${PERPLEXITY_API_KEY:?Set PERPLEXITY_API_KEY in shell}"
 
-	python3 - "query" <<'PY'
+	python3 - "$query" <<'PY'
 import json, os, sys, urllib.request
 
 q = sys.argv[1]
@@ -63,7 +63,7 @@ body = {
 with urllib.request.urlopen(req, data=json.dumps(body).encode()) as r:
 	data = json.load(r)
 
-print(data["choices"][0]["message"][content])
+print(data["choices"][0]["message"]["content"])
 PY
 	exit 0
 fi
